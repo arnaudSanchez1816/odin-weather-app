@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}",
+            "runtimeExecutable": "/var/lib/flatpak/exports/bin/com.google.Chrome"
+        },
+        {
+            "name": "Launch Firefox",
+            "type": "firefox",
+            "request": "launch",
+            "reAttach": true,
+            "url": "http://localhost:8080/",
+            "webRoot": "${workspaceFolder}",
+            "timeout": 90000,
+            "tmpDir": "${workspaceFolder}/.temp",
+            "pathMappings": [
+                {
+                    "url": "webpack:///src/",
+                    "path": "${workspaceFolder}/src/"
+                },
+                {
+                    "url": "webpack-internal:///src/",
+                    "path": "${workspaceFolder}/src/"
+                }
+            ]
+        }
+    ]
+}
