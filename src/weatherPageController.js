@@ -29,7 +29,8 @@ function displayWeatherDetails(weatherJson, usedLocalLocation = false) {
     const locationTime = document.querySelector("#location-time")
     if (locationTime) {
         const { datetimeEpoch } = currentConditions
-        const time = new Date(datetimeEpoch)
+        // Seconds to milliseconds
+        const time = new Date(datetimeEpoch * 1000)
 
         locationTime.textContent = time.toLocaleTimeString()
     }
