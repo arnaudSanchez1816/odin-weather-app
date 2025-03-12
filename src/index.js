@@ -6,6 +6,7 @@ import {
     displayWeatherDetails,
     displayLocationNotFound,
     displayApiError,
+    toggleLoader,
 } from "./weatherPageController.js"
 
 const weatherForm = document.querySelector("#weather-form")
@@ -22,10 +23,15 @@ function onWeatherLocationSubmit(event) {
 }
 
 async function onMyLocationWeatherClicked() {
-    const position = await getUserLocation()
-    if (position !== null) {
-        position.localLocation = true
-        displayWeather(position)
+    try {
+        toggleLoader(true)
+        const position = await getUserLocation()
+        if (position !== null) {
+            position.localLocation = true
+            displayWeather(position)
+        }
+    } finally {
+        toggleLoader(false)
     }
 }
 
@@ -35,6 +41,7 @@ async function displayWeather(location) {
     }
 
     try {
+        toggleLoader(true)
         const weatherJson = await fetchWeatherForLocation(location)
         console.log(weatherJson)
         if (weatherJson) {
@@ -43,7 +50,13 @@ async function displayWeather(location) {
             displayLocationNotFound()
         }
     } catch (error) {
-        displayApiError(error.code)
+        if (error.code === 400) {
+            displayLocationNotFound()
+        } else {
+            displayApiError()
+        }
+    } finally {
+        toggleLoader(false)
     }
 }
 

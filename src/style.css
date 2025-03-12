@@ -2,14 +2,16 @@
     --dark-color: #121212;
     --dark-color-1: #1f1f1f;
     --dark-color-transparent: rgb(18, 18, 18, 0.2);
+    --error-color: #cf6679;
 
+    --dark-text-color: rgba(0, 0, 0, 0.87);
     --light-text-color: rgba(255, 255, 255, 0.87);
-    --light-text-color-1: rgba(255, 255, 255, 0.60); 
-    --light-text-color-2: rgba(255, 255, 255, 0.38); 
+    --light-text-color-1: rgba(255, 255, 255, 0.6);
+    --light-text-color-2: rgba(255, 255, 255, 0.38);
     --primary-color: #1abc9c;
     --primary-color-darker: #16a085;
-    --accent-color:#9b59b6;
-    --accent-color-darker:#8e44ad;
+    --accent-color: #9b59b6;
+    --accent-color-darker: #8e44ad;
     --transition-duration: 0.3s;
 }
 
@@ -30,14 +32,45 @@
 
 body {
     display: grid;
-    grid-template-rows: 100px 1fr 100px;
+    grid-template-rows: 100px 50px 1fr 100px;
+    grid-template-areas: 
+    "header"
+    "others"
+    "main"
+    "footer";
     width: 100%;
     min-height: 100vh;
     background-color: var(--dark-color);
     color: var(--light-text-color);
 }
 
-#weather-infos {
+.loader-container {
+    grid-area: others;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #fff;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#weather-infos, .error-container {
     justify-self: center;
     max-height: 100%;
     height: fit-content;
@@ -45,6 +78,17 @@ body {
     padding: 30px;
     border-radius: 20px;
     background-color: var(--dark-color-1);
+    grid-area: main;
+    margin-top: 20px;
+}
+
+.error-container {
+    background-color: var(--error-color);
+    color: var(--dark-text-color);
+    font-size: 1.25rem;
+    p {
+        text-align: center;
+    }
 }
 
 .location-summary {
@@ -152,7 +196,7 @@ body {
     font-weight: bold;
 }
 
-.windspeed-icon svg{
+.windspeed-icon svg {
     height: 40px;
     width: 40px;
     vertical-align: middle;
@@ -167,7 +211,7 @@ body {
     width: 100%;
     color: var(--light-text-color-1);
 
-    > span:first-child{
+    > span:first-child {
         font-weight: bold;
     }
 }
@@ -175,6 +219,7 @@ body {
 header {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    grid-area: header;
 }
 
 .app-logo {
@@ -287,6 +332,7 @@ footer {
     justify-content: center;
     align-items: center;
     gap: 1ch;
+    grid-area: footer;
 }
 
 footer a {

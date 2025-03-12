@@ -32,9 +32,9 @@ async function fetchWeatherForLocation(location) {
         const response = await fetch(request)
         if (!response.ok) {
             const error = new Error(
-                `Failed to fetch weather for location : ${locationString}\nStatus : ${response.statusText}`
+                `Failed to fetch weather for location : ${locationString}\nStatus : ${response.status}`
             )
-            error.code = response.statusText
+            error.code = response.status
             throw error
         }
         const responseJson = await response.json()
@@ -43,19 +43,6 @@ async function fetchWeatherForLocation(location) {
         console.error(error)
         throw error
     }
-}
-
-function getNavigatorLanguage() {
-    const languageRegex = /^([A-Za-z]{2,3})(-[A-Za-z]{2,3})?$/
-    const navLanguage = navigator.language
-
-    const results = languageRegex.exec(navLanguage)
-
-    if (results === null) {
-        return "en"
-    }
-
-    return results[1]
 }
 
 export { fetchWeatherForLocation }

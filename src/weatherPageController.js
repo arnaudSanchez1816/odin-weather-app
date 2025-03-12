@@ -1,11 +1,18 @@
-import { getMyLocationString } from "./intl.js"
+import {
+    getMyLocationString,
+    getGenericErrorString,
+    getLocationNotFoundErrorString,
+    getNavigatorLanguage,
+} from "./intl.js"
 import getWeatherTypeData from "./weatherTypes.js"
+
+const INVISIBLE_CLASS = "invisible"
 
 function displayWeatherDetails(weatherJson, usedLocalLocation = false) {
     const { currentConditions, resolvedAddress } = weatherJson
 
-    const weatherInfos = document.querySelector("#weather-infos")
-    weatherInfos.classList.remove("invisible")
+    toggleMainContainer(true)
+    toggleErrorContainer(false)
 
     const locationName = document.querySelector("#location-name")
     if (locationName) {
@@ -56,8 +63,60 @@ function displayWeatherDetails(weatherJson, usedLocalLocation = false) {
     }
 }
 
-function displayLocationNotFound(location) {}
+function displayLocationNotFound() {
+    toggleMainContainer(false)
+    const errorContainer = toggleErrorContainer(true)
+    while (errorContainer.childElementCount > 0) {
+        errorContainer.removeChild(errorContainer.lastElementChild)
+    }
 
-function displayApiError(error) {}
+    const errorP = document.createElement("p")
+    errorP.textContent = getLocationNotFoundErrorString(getNavigatorLanguage())
+    errorContainer.appendChild(errorP)
+}
 
-export { displayWeatherDetails, displayLocationNotFound, displayApiError }
+function displayApiError() {
+    toggleMainContainer(false)
+    const errorContainer = toggleErrorContainer(true)
+    while (errorContainer.childElementCount > 0) {
+        errorContainer.removeChild(errorContainer.lastElementChild)
+    }
+
+    const errorP = document.createElement("p")
+    errorP.textContent = getGenericErrorString(getNavigatorLanguage())
+    errorContainer.appendChild(errorP)
+}
+
+function toggleMainContainer(display) {
+    const weatherInfos = document.querySelector("#weather-infos")
+    if (weatherInfos) {
+        weatherInfos.classList.toggle(INVISIBLE_CLASS, !display)
+    }
+
+    return weatherInfos
+}
+
+function toggleErrorContainer(display) {
+    const errorContainer = document.querySelector(".error-container")
+    if (errorContainer) {
+        errorContainer.classList.toggle(INVISIBLE_CLASS, !display)
+    }
+
+    return errorContainer
+}
+
+function toggleLoader(display) {
+    const loaderContainer = document.querySelector(".loader-container")
+    if (loaderContainer) {
+        loaderContainer.classList.toggle(INVISIBLE_CLASS, !display)
+    }
+
+    return loaderContainer
+}
+
+export {
+    displayWeatherDetails,
+    displayLocationNotFound,
+    displayApiError,
+    toggleLoader,
+}
