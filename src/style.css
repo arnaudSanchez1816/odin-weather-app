@@ -1,11 +1,19 @@
 :root {
-    --white-text-color : #fff;
+    --white-text-color: #fff;
     --white-background-color: #ecf0f1;
     --grey-background-color: #bdc3c7;
     --dark-background-color: #2c3e50;
     --blue-grey-color: #40739e;
     --red-orange-color: #c23616;
     --dark-grey-color: #7f8fa6;
+
+    --dark-color: #121212;
+    --dark-color-1: #1f1f1f;
+    --dark-color-transparent: rgb(18, 18, 18, 0.2);
+
+    --light-text-color: rgba(255, 255, 255, 0.87);
+    --light-text-color-1: rgba(255, 255, 255, 0.60); 
+    --light-text-color-2: rgba(255, 255, 255, 0.38); 
 }
 
 .sr-only {
@@ -13,11 +21,11 @@
     width: 1px;
     height: 1px;
     padding: 0;
-    margin: -1px; 
+    margin: -1px;
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
-  }
+}
 
 .invisible {
     display: none !important;
@@ -25,77 +33,138 @@
 
 body {
     display: grid;
-    grid-template-rows: 100px 1fr 50px;
+    grid-template-rows: 100px 1fr 100px;
     width: 100%;
     min-height: 100vh;
-    background-color: #f5f6fa;
+    background-color: var(--dark-color);
+    color: var(--light-text-color);
 }
 
-#weather-details {
+#weather-infos {
     justify-self: center;
-    width: 100%;
+    max-height: 100%;
+    height: fit-content;
+    width: 50vw;
+    padding: 30px;
+    border-radius: 20px;
+    background-color: var(--dark-color-1);
 }
 
 .location-summary {
     display: grid;
-    grid-template-rows: 1fr 200px;
+    grid-template-rows: 1fr;
     grid-template-columns: 1fr;
     position: relative;
-    color: var(--white-text-color);
+    margin: -30px -30px 0;
 }
 
 .video-wrapper {
-    grid-area: 1/1/span 2;
+    grid-area: 1/1;
     width: 100%;
-    height: 40vh;
+    height: 30vh;
 }
 
 .video-wrapper::after {
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
     width: 100%;
     height: 100%;
     content: "";
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0.6)
-      );
+    background: linear-gradient(to right, var(--dark-color-1), rgba(0 0 0 / 0));
+    border-radius: 10px 20px 0 0;
 }
 
 .location-summary-video {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 20px 20px 0 0;
 }
 
 .location-summary > .location-summary-content {
-    padding: 0 3rem;
-    grid-area: 2/1;
+    padding: 0 3rem 3rem;
+    grid-area: 1/1;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 
     > #location-name {
-        font-size: 3rem;
+        font-size: 2.5rem;
         margin: 0 0 30px;
     }
 
-    >#location-conditions {
-        font-size: 2rem;
+    > #location-conditions {
+        font-size: 1.5rem;
         margin: 0;
         word-wrap: break-word;
+        color: var(--light-text-color-1);
     }
 }
 
-footer {
+.location-details {
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    height: 100px;
+    margin-top: 20px;
 }
 
+.location-temperatures-grid {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    grid-template-rows: 50px 1fr;
+}
+
+.temperature-icon {
+    grid-area: 1 / 1 / span 2 / 2;
+    svg {
+        height: 96px;
+        width: 96px;
+    }
+}
+
+#location-temp {
+    grid-area: 1 / 2;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+#location-feel-temp-container {
+    grid-area: 2 / 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .location-feel-temp-label {
+        color: var(--light-text-color-1);
+    }
+
+    #location-feel-temp {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--light-text-color-1);
+    }
+}
+
+.time-container, .windspeed-container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 1ch;
+
+    font-size: 1.5rem;
+}
+
+.time-icon svg, .windspeed-icon svg{
+    height: 40px;
+    width: 40px;
+    vertical-align: middle;
+}
 
 header {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);    
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .app-logo {
@@ -139,11 +208,12 @@ header {
     background-color: var(--dark-grey-color);
     height: 36px;
     outline: none;
-    color: #fff;
+    color: var(--light-text-color);
     font-weight: bold;
 
-    &:focus, &:focus+.search-button{
-        border: 3px solid var(--blue-grey-color);
+    &:focus,
+    &:focus + .search-button {
+        border: 3px solid var(--light-text-color);
     }
 }
 
@@ -156,7 +226,7 @@ header {
     background-color: var(--dark-grey-color);
     height: 36px;
     cursor: pointer;
-    color: #fff;
+    color: var(--light-text-color);
 
     svg {
         height: 24px;
@@ -177,7 +247,7 @@ header {
     cursor: pointer;
     font-size: 1em;
     font-weight: bold;
-    color: #fff;
+    color: var(--light-text-color);
     background-color: var(--dark-grey-color);
     transition: background-color 0.3s;
 
@@ -185,11 +255,37 @@ header {
         background-color: var(--blue-grey-color);
         transition: background-color 0.3s;
     }
-    
+
     svg {
         height: 20px;
         width: 20px;
         margin-right: 0.5em;
-        color: #fff;
+        color: var(--light-text-color);
+    }
+}
+
+.location-secondary-container {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1ch;
+}
+
+footer a {
+    color: var(--light-text-color);
+    font-weight: bold;
+    transition: color 0.3s;
+
+    &:hover {
+        color: var(--light-text-color-1);
+        transition: color 0.3s;
     }
 }
