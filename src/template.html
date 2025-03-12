@@ -6,6 +6,87 @@
         <title>Weather App</title>
     </head>
     <body>
-        <h1>Weather App</h1>
+        <header>
+            <a href="#" class="app-logo">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="96"
+                    height="96"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        fill="currentColor"
+                        d="M13.5 15h-2.27l1.45-2.5a1 1 0 1 0-1.74-1l-2.31 4a1 1 0 0 0 0 1a1 1 0 0 0 .87.5h2.27l-1.45 2.5a1 1 0 0 0 1.74 1l2.31-4a1 1 0 0 0 0-1a1 1 0 0 0-.87-.5m4.92-7.79a7 7 0 0 0-13.36 1.9A4 4 0 0 0 6 17a1 1 0 0 0 0-2a2 2 0 0 1 0-4a1 1 0 0 0 1-1a5 5 0 0 1 9.73-1.61a1 1 0 0 0 .78.66A3 3 0 0 1 17 15a1 1 0 0 0 0 2a5 5 0 0 0 1.42-9.79"
+                    />
+                </svg>
+            </a>
+            <div class="header-controls">
+                <form id="weather-form">
+                    <div class="form-item">
+                        <label for="weather-search-location" class="sr-only"
+                            >Search location</label
+                        >
+                        <input
+                            type="search"
+                            id="weather-search-location"
+                            name="weather-location"
+                        />
+                        <button class="search-button" type="submit">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    fill="currentcolor"
+                                    d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+                <button type="button" id="weather-my-location">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            fill="currentcolor"
+                            d="M11 21.95v-1q-3.125-.35-5.363-2.587T3.05 13h-1q-.425 0-.712-.288T1.05 12t.288-.712T2.05 11h1q.35-3.125 2.588-5.363T11 3.05v-1q0-.425.288-.712T12 1.05t.713.288t.287.712v1q3.125.35 5.363 2.588T20.95 11h1q.425 0 .713.288t.287.712t-.287.713t-.713.287h-1q-.35 3.125-2.587 5.363T13 20.95v1q0 .425-.288.713T12 22.95t-.712-.287T11 21.95M12 19q2.9 0 4.95-2.05T19 12t-2.05-4.95T12 5T7.05 7.05T5 12t2.05 4.95T12 19m0-3q-1.65 0-2.825-1.175T8 12t1.175-2.825T12 8t2.825 1.175T16 12t-1.175 2.825T12 16m0-2q.825 0 1.413-.587T14 12t-.587-1.412T12 10t-1.412.588T10 12t.588 1.413T12 14m0-2"
+                        />
+                    </svg>
+                    My location
+                </button>
+            </div>
+        </header>
+
+        <section id="weather-infos" class="invisible">
+            <div class="location-summary">
+                <div class="video-wrapper">
+                    <video
+                        id="summary-video"
+                        class="location-summary-video"
+                        src="./videos/rainy_weather.mp4"
+                        autoplay
+                        loop
+                        muted
+                    ></video>
+                </div>
+                <div class="location-summary-content">
+                    <h1 id="location-name">Location name</h1>
+                    <p id="location-conditions"></p>
+                </div>
+            </div>
+            <div></div>
+            <p>Time : <span id="location-time"> 20:37</span></p>
+            <p>Temperature : <span id="location-temp"> 21°C</span></p>
+            <p>Feels like : <span id="location-feel-temp"> 21°C</span></p>
+            <p>Wind speed: <span id="location-windspeed"> 30km/h</span></p>
+        </section>
+        <footer>
+            <span>
+                Videos from
+                <a
+                    href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=video&utm_content=74585"
+                    >Pixabay</a
+                >
+            </span>
+        </footer>
     </body>
 </html>
