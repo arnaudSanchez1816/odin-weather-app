@@ -5,6 +5,7 @@ import {
     getNavigatorLanguage,
 } from "./intl.js"
 import getWeatherTypeData from "./weatherTypes.js"
+import { format } from "date-fns"
 
 const INVISIBLE_CLASS = "invisible"
 
@@ -39,7 +40,7 @@ function displayWeatherDetails(weatherJson, usedLocalLocation = false) {
         // Seconds to milliseconds
         const time = new Date(datetimeEpoch * 1000)
 
-        locationTime.textContent = time.toLocaleTimeString()
+        locationTime.textContent = format(time, "HH:mm:ss OOOO")
     }
 
     const locationTemp = document.querySelector("#location-temp")
