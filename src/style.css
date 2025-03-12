@@ -1,12 +1,4 @@
 :root {
-    --white-text-color: #fff;
-    --white-background-color: #ecf0f1;
-    --grey-background-color: #bdc3c7;
-    --dark-background-color: #2c3e50;
-    --blue-grey-color: #40739e;
-    --red-orange-color: #c23616;
-    --dark-grey-color: #7f8fa6;
-
     --dark-color: #121212;
     --dark-color-1: #1f1f1f;
     --dark-color-transparent: rgb(18, 18, 18, 0.2);
@@ -14,6 +6,11 @@
     --light-text-color: rgba(255, 255, 255, 0.87);
     --light-text-color-1: rgba(255, 255, 255, 0.60); 
     --light-text-color-2: rgba(255, 255, 255, 0.38); 
+    --primary-color: #1abc9c;
+    --primary-color-darker: #16a085;
+    --accent-color:#9b59b6;
+    --accent-color-darker:#8e44ad;
+    --transition-duration: 0.3s;
 }
 
 .sr-only {
@@ -93,6 +90,7 @@ body {
     > #location-name {
         font-size: 2.5rem;
         margin: 0 0 30px;
+        color: var(--light-text-color);
     }
 
     > #location-conditions {
@@ -118,6 +116,7 @@ body {
 
 .temperature-icon {
     grid-area: 1 / 1 / span 2 / 2;
+    color: var(--primary-color);
     svg {
         height: 96px;
         width: 96px;
@@ -135,31 +134,42 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
-    .location-feel-temp-label {
-        color: var(--light-text-color-1);
-    }
+    color: var(--light-text-color-1);
 
     #location-feel-temp {
         font-size: 1.5rem;
         font-weight: bold;
-        color: var(--light-text-color-1);
     }
 }
 
-.time-container, .windspeed-container {
+.windspeed-container {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     gap: 1ch;
 
     font-size: 1.5rem;
+    font-weight: bold;
 }
 
-.time-icon svg, .windspeed-icon svg{
+.windspeed-icon svg{
     height: 40px;
     width: 40px;
     vertical-align: middle;
+    color: var(--primary-color);
+}
+
+.time-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex: 1;
+    width: 100%;
+    color: var(--light-text-color-1);
+
+    > span:first-child{
+        font-weight: bold;
+    }
 }
 
 header {
@@ -169,16 +179,16 @@ header {
 
 .app-logo {
     text-decoration: none;
-    color: var(--dark-grey-color);
+    color: var(--primary-color);
     margin: 0 0 0 30px;
     grid-area: 1 / 1;
     z-index: 1;
-    transition: color 0.3s;
+    transition: color var(--transition-duration);
     width: min-content;
 
     &:hover {
-        transition: color 0.3s;
-        color: var(--blue-grey-color);
+        transition: color var(--transition-duration);
+        color: var(--primary-color-darker);
     }
 }
 
@@ -199,13 +209,13 @@ header {
 
 #weather-search-location {
     border-radius: 15px 0 0 15px;
-    border: 3px solid var(--dark-grey-color);
+    border: 3px solid var(--primary-color);
     border-right: none !important;
-    transition: border 0.3s;
+    transition: border var(--transition-duration);
 
     padding: 8px 6px;
     font-size: 1em;
-    background-color: var(--dark-grey-color);
+    background-color: var(--primary-color);
     height: 36px;
     outline: none;
     color: var(--light-text-color);
@@ -218,12 +228,12 @@ header {
 }
 
 .search-button {
-    border: 3px solid var(--dark-grey-color);
+    border: 3px solid var(--primary-color);
     border-left: none !important;
     border-radius: 0 15px 15px 0;
-    transition: border 0.3s;
+    transition: border var(--transition-duration);
 
-    background-color: var(--dark-grey-color);
+    background-color: var(--primary-color);
     height: 36px;
     cursor: pointer;
     color: var(--light-text-color);
@@ -248,12 +258,12 @@ header {
     font-size: 1em;
     font-weight: bold;
     color: var(--light-text-color);
-    background-color: var(--dark-grey-color);
-    transition: background-color 0.3s;
+    background-color: var(--primary-color);
+    transition: background-color var(--transition-duration);
 
     &:hover {
-        background-color: var(--blue-grey-color);
-        transition: background-color 0.3s;
+        background-color: var(--primary-color-darker);
+        transition: background-color var(--transition-duration);
     }
 
     svg {
@@ -282,10 +292,10 @@ footer {
 footer a {
     color: var(--light-text-color);
     font-weight: bold;
-    transition: color 0.3s;
+    transition: color var(--transition-duration);
 
     &:hover {
         color: var(--light-text-color-1);
-        transition: color 0.3s;
+        transition: color var(--transition-duration);
     }
 }
