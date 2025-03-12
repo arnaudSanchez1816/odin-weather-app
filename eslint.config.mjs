@@ -7,4 +7,9 @@ export default [
     { languageOptions: { globals: globals.browser } },
     pluginJs.configs.recommended,
     eslintConfigPrettier,
+    {
+        rules: {
+            "no-unused-vars": "warn",
+        },
+    },
 ]
